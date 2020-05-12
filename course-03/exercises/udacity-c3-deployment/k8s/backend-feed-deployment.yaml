@@ -15,7 +15,6 @@ spec:
   selector:
       matchLabels:
         service: backend-feed
-        version: v2
   template:
     metadata:
       labels:

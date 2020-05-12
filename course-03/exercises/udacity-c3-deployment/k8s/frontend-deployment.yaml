@@ -15,7 +15,6 @@ spec:
   selector:
       matchLabels:
         service: frontend
-        version: v2
   template:
     metadata:
       labels:
