@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     service: frontend
-    #version: v2
+    version: v2
   name: frontend
 spec:
   replicas: 2
@@ -15,12 +15,12 @@ spec:
   selector:
       matchLabels:
         service: frontend
-        #version: v2
+        version: v2
   template:
     metadata:
       labels:
         service: frontend
-        #version: v2
+        version: v2
         api: external        
     spec:
       containers:

@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   labels:
     service: backend-user
-    #version: v2
+    version: v2
   name: backend-user
 spec:
   replicas: 2
@@ -15,12 +15,12 @@ spec:
   selector:
       matchLabels:
         service: backend-user
-        #version: v2 
+        version: v2 
   template:
     metadata:
       labels:
         service: backend-user
-        #version: v2
+        version: v2
     spec:
       containers:
       - image: moemad711/udacity-restapi-user
