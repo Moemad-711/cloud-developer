@@ -25,7 +25,7 @@ install:
   
   #Pushhing new Images to Docker Reposit
   - docker push moemad711/udacity-restapi-user:latest
-  - docker push moemad711/udacity-restap-feed:latest
+  - docker push moemad711/udacity-restapi-feed:latest
   - docker push moemad711/reverseproxy:latest
   - docker push moemad711/udacity-frontend:local
   
