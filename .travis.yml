@@ -2,8 +2,10 @@ language: minimal
 
 services: docker
 
-env:
+envdat:
   - DOCKER_COMPOSE_VERSION=1.25.5
+  - KOPS_CLUSTER_NAME=moemad.k8s.local
+  - KOPS_STATE_STORE=s3://udagram-moemad-kops-state-store
 
 
 before_install:
@@ -24,9 +26,9 @@ before_install:
 
 
 install:
-  - docker-compose -f course-03/exercises/udacity-c3-deployment/docker/docker-compose-build.yaml build --parallel 
-#  - kops update cluster moemad.k8s.local --yes s3://udagram-moemad-kops-state-store
-  - kops validate cluster --name moemad.k8s.local --state s3://udagram-moemad-kops-state-store --yes
+  - docker-compose -f course-03/exercises/udacity-c3-deployment/docker/docker-compose.yaml build --parallel 
+ # - kops update cluster moemad.k8s.local --yes s3://udagram-moemad-kops-state-store
+  - kops validate cluster 
   - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/aws-secret.yaml
   - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/env-secret.yaml
   - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/env-configmap.yaml
