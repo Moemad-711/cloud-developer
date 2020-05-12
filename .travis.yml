@@ -28,7 +28,11 @@ before_install:
 install:
   - docker-compose -f course-03/exercises/udacity-c3-deployment/docker/docker-compose.yaml build --parallel 
  # - kops update cluster moemad.k8s.local --yes s3://udagram-moemad-kops-state-store
-  - kops validate cluster 
+  - sed -i -e 's|KUBE_CA_CERT|'"${KUBE_CA_CERT}"'|g' kubeconfig
+  - sed -i -e 's|KUBE_ENDPOINT|'"${KUBE_ENDPOINT}"'|g' kubeconfig
+  - sed -i -e 's|KUBE_ADMIN_CERT|'"${KUBE_ADMIN_CERT}"'|g' kubeconfig
+  - sed -i -e 's|KUBE_ADMIN_KEY|'"${KUBE_ADMIN_KEY}"'|g' kubeconfig
+  - sed -i -e 's|KUBE_USERNAME|'"${KUBE_USERNAME}"'|g' kubeconfig 
   - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/aws-secret.yaml
   - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/env-secret.yaml
   - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/env-configmap.yaml
