@@ -2,7 +2,7 @@ language: minimal
 
 services: docker
 
-envdat:
+env:
   - DOCKER_COMPOSE_VERSION=1.25.5
   - KOPS_CLUSTER_NAME=moemad.k8s.local
   - KOPS_STATE_STORE=s3://udagram-moemad-kops-state-store
