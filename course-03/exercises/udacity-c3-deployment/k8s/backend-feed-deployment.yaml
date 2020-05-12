@@ -3,21 +3,36 @@ kind: Deployment
 metadata:
   labels:
     service: backend-feed
+    #version: v2
   name: backend-feed
 spec:
   replicas: 3
+  strategy:
+    typy: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 25%
   selector:
       matchLabels:
         service: backend-feed
+        #version: v2
   template:
     metadata:
       labels:
         service: backend-feed
+        #version: v2
     spec:
       containers:
       - image: moemad711/udacity-restapi-feed
         name: backend-feed
-        imagePullPolicy: Always  
+        imagePullPolicy: Always
+        readinessProbe:
+          httpGet:
+            patth: /
+            port: 8080
+            initialDelaySeconds:  5
+            periodSeconds: 5
+            successThreshold: 1  
         resources:
           requests:
             memory: "64Mi"

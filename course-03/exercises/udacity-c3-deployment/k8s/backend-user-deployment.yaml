@@ -3,21 +3,36 @@ kind: Deployment
 metadata:
   labels:
     service: backend-user
+    #version: v2
   name: backend-user
 spec:
   replicas: 2
+  strategy:
+    typy: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 25%
   selector:
       matchLabels:
-        service: backend-user 
+        service: backend-user
+        #version: v2 
   template:
     metadata:
       labels:
         service: backend-user
+        #version: v2
     spec:
       containers:
       - image: moemad711/udacity-restapi-user
         name: backend-user 
-        imagePullPolicy: Always  
+        imagePullPolicy: Always
+        readinessProbe:
+          httpGet:
+            patth: /
+            port: 8080
+            initialDelaySeconds:  5
+            periodSeconds: 5
+            successThreshold: 1  
         resources:
           requests:
             memory: "64Mi"

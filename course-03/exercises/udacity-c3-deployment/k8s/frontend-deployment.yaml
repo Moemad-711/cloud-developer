@@ -3,22 +3,37 @@ kind: Deployment
 metadata:
   labels:
     service: frontend
+    #version: v2
   name: frontend
 spec:
   replicas: 2
+  strategy:
+    typy: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 25%
   selector:
       matchLabels:
         service: frontend
+        #version: v2
   template:
     metadata:
       labels:
         service: frontend
+        #version: v2
         api: external        
     spec:
       containers:
       - image: moemad711/udacity-frontend:local
         name: frontend
-        imagePullPolicy: Always          
+        imagePullPolicy: Always
+        readinessProbe:
+          httpGet:
+            patth: /
+            port: 8080
+            initialDelaySeconds:  5
+            periodSeconds: 5
+            successThreshold: 1          
         ports:
         - containerPort: 80
         resources:
