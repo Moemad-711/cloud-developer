@@ -28,9 +28,10 @@ spec:
         name: frontend
         imagePullPolicy: Always
         readinessProbe:
-          httpGet:
-            path: /
-            port: 8080
+          exec:
+            command:
+            - touch
+            - /tmp/healthy
           initialDelaySeconds:  5
           periodSeconds: 5
           successThreshold: 1          
