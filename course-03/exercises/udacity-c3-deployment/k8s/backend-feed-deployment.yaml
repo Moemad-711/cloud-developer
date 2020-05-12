@@ -28,11 +28,11 @@ spec:
         imagePullPolicy: Always
         readinessProbe:
           httpGet:
-            patth: /
+            path: /
             port: 8080
-            initialDelaySeconds:  5
-            periodSeconds: 5
-            successThreshold: 1  
+          initialDelaySeconds:  5
+          periodSeconds: 5
+          successThreshold: 1  
         resources:
           requests:
             memory: "64Mi"
