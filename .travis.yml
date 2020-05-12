@@ -32,10 +32,10 @@ install:
   - sed -i -e 's|KUBE_ADMIN_CERT|'"${KUBE_ADMIN_CERT}"'|g' kubeconfig
   - sed -i -e 's|KUBE_ADMIN_KEY|'"${KUBE_ADMIN_KEY}"'|g' kubeconfig
   - sed -i -e 's|KUBE_USERNAME|'"${KUBE_USERNAME}"'|g' kubeconfig 
-  - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/aws-secret.yaml
-  - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/env-secret.yaml
-  - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/env-configmap.yaml
-  - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/backend-feed-deployment.yaml
-  - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/backend-user-deployment.yaml
-  - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/reverseproxy-deployment.yaml
-  - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/frontend-deployment.yaml
+  - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/aws-secret.yaml --kubeconfig kubeconfig
+  - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/env-secret.yaml --kubeconfig kubeconfig 
+  - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/env-configmap.yaml --kubeconfig kubeconfig
+  - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/backend-feed-deployment.yaml --kubeconfig kubeconfig 
+  - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/backend-user-deployment.yaml --kubeconfig kubeconfig
+  - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/reverseproxy-deployment.yaml --kubeconfig kubeconfig
+  - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/frontend-deployment.yaml --kubeconfig kubeconfig
