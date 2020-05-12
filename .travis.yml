@@ -30,10 +30,10 @@ install:
   - docker-compose -f course-03/exercises/udacity-c3-deployment/docker/docker-compose.yaml build --parallel 
   
   #Pushhing new Images to Docker Repo
-  - docker push "$DOCKER_USERNAME"/udacity-restapi-user:latest
-  - docker push "$DOCKER_USERNAME"/udacity-restapi-feed:latest
-  - docker push "$DOCKER_USERNAME"/reverseproxy:latest
-  - docker push "$DOCKER_USERNAME"/udacity-frontend:local
+  - docker push moemad711/udacity-restapi-user:latest
+  - docker push moemad711/udacity-restapi-feed:latest
+  - docker push moemad711/reverseproxy:latest
+  - docker push moemad711/udacity-frontend:local
   
   #Updating the kubeconfig
   - sed -i -e 's|KUBE_CA_CERT|'"${KUBE_CA_CERT}"'|g' kubeconfig
