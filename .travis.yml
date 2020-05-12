@@ -4,8 +4,6 @@ services: docker
 
 env:
   - DOCKER_COMPOSE_VERSION=1.25.5
-  - KOPS_CLUSTER_NAME=moemad.k8s.local
-  - KOPS_STATE_STORE=s3://udagram-moemad-kops-state-store
 
 before_install:
   - docker -v && docker-compose -v
@@ -22,7 +20,8 @@ before_install:
   - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
   - unzip awscliv2.zip
   - sudo ./aws/install
-
+  - export KOPS_CLUSTER_NAME=moemad.k8s.local
+  - export KOPS_STATE_STORE=s3://udagram-moemad-kops-state-store
 
 
 install:
