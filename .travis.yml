@@ -22,19 +22,27 @@ before_install:
   - curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
   - unzip awscliv2.zip
   - sudo ./aws/install
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
 
 
 install:
   - docker-compose -f course-03/exercises/udacity-c3-deployment/docker/docker-compose.yaml build --parallel 
- # - kops update cluster moemad.k8s.local --yes s3://udagram-moemad-kops-state-store
+  
+  #Pushhing new Images to Docker Repo
+  - docker push "$DOCKER_USERNAME"/udacity-restapi-user:latest
+  - docker push "$DOCKER_USERNAME"/udacity-restapi-feed:latest
+  - docker push "$DOCKER_USERNAME"/reverseproxy:latest
+  - docker push "$DOCKER_USERNAME"/udacity-frontend:local
+  
+  #Updating the kubeconfig
   - sed -i -e 's|KUBE_CA_CERT|'"${KUBE_CA_CERT}"'|g' kubeconfig
   - sed -i -e 's|KUBE_ENDPOINT|'"${KUBE_ENDPOINT}"'|g' kubeconfig
   - sed -i -e 's|KUBE_ADMIN_CERT|'"${KUBE_ADMIN_CERT}"'|g' kubeconfig
   - sed -i -e 's|KUBE_ADMIN_KEY|'"${KUBE_ADMIN_KEY}"'|g' kubeconfig
   - sed -i -e 's|KUBE_USERNAME|'"${KUBE_USERNAME}"'|g' kubeconfig 
-  - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/aws-secret.yaml --kubeconfig kubeconfig
-  - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/env-secret.yaml --kubeconfig kubeconfig 
-  - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/env-configmap.yaml --kubeconfig kubeconfig
+
+  #Deploying the new Deployments
   - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/backend-feed-deployment.yaml --kubeconfig kubeconfig 
   - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/backend-user-deployment.yaml --kubeconfig kubeconfig
   - kubectl apply -f course-03/exercises/udacity-c3-deployment/k8s/reverseproxy-deployment.yaml --kubeconfig kubeconfig
