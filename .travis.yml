@@ -23,9 +23,9 @@ before_install:
 install:
   - docker-compose -f course-03/exercises/udacity-c3-deployment/docker/docker-compose-build.yaml build --parallel 
   
-  #Pushhing new Images to Docker Repo
+  #Pushhing new Images to Docker Reposit
   - docker push moemad711/udacity-restapi-user:latest
-  - cocker push moemad711/udacity-restap-feed:latest
+  - docker push moemad711/udacity-restap-feed:latest
   - docker push moemad711/reverseproxy:latest
   - docker push moemad711/udacity-frontend:local
   
