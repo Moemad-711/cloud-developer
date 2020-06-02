@@ -15,7 +15,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
   const split = authorization.split(' ')
   const jwtToken = split[1]
 
-  const userId = parseUserId(jwtToken)
+  const userId = parseUserId(jwtToken)  
 
   const result = await docClient.query({
     TableName: TODOTable,
