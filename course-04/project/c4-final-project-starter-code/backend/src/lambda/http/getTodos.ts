@@ -7,7 +7,6 @@ import { DocumentClient } from 'aws-sdk/clients/dynamodb'
 
 const docClient: DocumentClient = new  AWS.DynamoDB.DocumentClient()
 const TODOTable = process.env.TODO_TABLE
-const bucketName = process.env.attachment_S3_BUCKET
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
   // TODO: Get all TODO items for a current user
