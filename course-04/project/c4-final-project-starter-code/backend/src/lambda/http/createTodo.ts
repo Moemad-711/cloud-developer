@@ -51,7 +51,13 @@ export const handler = middy(async (event: APIGatewayProxyEvent): Promise<APIGat
     return {
       statusCode: 201,
       body: JSON.stringify({
-        newItem: newItem,
+        item: {
+          todoId,
+          createdAt,
+          ...newTodo,
+          done: false,
+          attachmentUrl: `https://${bucketName}.s3.amazonaws.com/${todoId}`
+        }
       })
     }})
 
