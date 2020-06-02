@@ -14,6 +14,14 @@ const logger = createLogger('auth')
 // To get this URL you need to go to an Auth0 page -> Show Advanced Settings -> Endpoints -> JSON Web Key Set
 const jwksUrl = 'https://dev--ynll5c8.auth0.com/.well-known/jwks.json'
 
+const jwksClient = require('jwks-client');
+
+const client = jwksClient({
+  cache: true,
+  jwksUri: jwksUrl
+});
+
+
 export const handler = async (
   event: CustomAuthorizerEvent
 ): Promise<CustomAuthorizerResult> => {
@@ -61,9 +69,11 @@ async function verifyToken(authHeader: string): Promise<JwtPayload> {
   // TODO: Implement token verification
   // You should implement it similarly to how it was implemented for the exercise for the lesson 5
   // You can read more about how to do this here: https://auth0.com/blog/navigating-rs256-and-jwks/
+
+  /*
   let signingKeys
 
-   Axios.get(jwksUrl).then(function(res){
+  Axios.get(jwksUrl).then(function(res){
     signingKeys = res;
     console.log(res);
   }).catch(function(error){
@@ -72,9 +82,15 @@ async function verifyToken(authHeader: string): Promise<JwtPayload> {
 
   const signingKeysJSON = JSON.parse(signingKeys);
   const secret = signingKeysJSON.keys[0].x5c;
+  */
+  let signingKey
+ const kid = jwt.header.kid;
+ client.getSigningKey(kid, (_err, key) => {
+    signingKey = key.publicKey;
+ });
+ 
 
-
-  return verify(token,secret,{algorithms: ['RS256']}) as JwtPayload
+  return verify(token,signingKey,{algorithms: ['RS256']}) as JwtPayload
 }
 
 function getToken(authHeader: string): string {
