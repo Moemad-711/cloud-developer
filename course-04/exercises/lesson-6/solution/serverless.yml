@@ -1,5 +1,5 @@
 service:
-  name: serverless-udagram-app
+  name: serverless-udagram-m711-app
 
 plugins:
   - serverless-webpack
@@ -9,14 +9,16 @@ plugins:
   - serverless-iam-roles-per-function
   - serverless-dynamodb-local
   - serverless-offline
+  - serverless-plugin-tracing
 
-# Uncomment to enable individual packaging
-# package:
-#   individually: true
+  
+package:
+  individually: true
+
 
 provider:
   name: aws
-  runtime: nodejs8.10
+  runtime: nodejs12.x
 
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'us-east-2'}
@@ -30,9 +32,9 @@ provider:
     IMAGES_TABLE: Images-${self:provider.stage}
     IMAGE_ID_INDEX: ImageIdIndex
     CONNECTIONS_TABLE: Connections-${self:provider.stage}
-    IMAGES_S3_BUCKET: serverless-udagram-images-moemad711-${self:provider.stage}
+    IMAGES_S3_BUCKET: serverless-udagram-images-m711-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
-    THUMBNAILS_S3_BUCKET: serverless-udagram-thumbnail-moemad711-${self:provider.stage}
+    THUMBNAILS_S3_BUCKET: serverless-udagram-thumbnail-m711-${self:provider.stage}
     AUTH_0_SECRET_ID: Auth0Secret-${self:provider.stage}
     AUTH_0_SECRET_FIELD: auth0Secret
 
@@ -80,6 +82,12 @@ provider:
       Action:
         - kms:Decrypt
       Resource: !GetAtt KMSKey.Arn
+    - Effect: Allow
+      Action:
+        - xray:PutTraceSegments
+        - xray:PutTelemetryRecords
+      Resource: "*"
+
 
 custom:
   topicName: imagesTopic-${self:provider.stage}
@@ -307,7 +315,8 @@ resources:
         NotificationConfiguration:
           TopicConfigurations:
             - Event: s3:ObjectCreated:Put
-              Topic: !Ref ImagesTopic
+              Topic: 
+                Ref: ImagesTopic
         CorsConfiguration:
           CorsRules:
             -
@@ -335,7 +344,8 @@ resources:
               Principal: '*'
               Action: 's3:GetObject'
               Resource: 'arn:aws:s3:::${self:provider.environment.IMAGES_S3_BUCKET}/*'
-        Bucket: !Ref AttachmentsBucket
+        Bucket: 
+          Ref: AttachmentsBucket
 
     SNSTopicPolicy:
       Type: AWS::SNS::TopicPolicy
@@ -348,12 +358,12 @@ resources:
                 AWS: "*"
               Action: sns:Publish
               Resource:
-                !Ref ImagesTopic
+                Ref: ImagesTopic
               Condition:
                 ArnLike:
                   AWS:SourceArn: arn:aws:s3:::${self:provider.environment.IMAGES_S3_BUCKET}
         Topics:
-          - !Ref ImagesTopic
+          - Ref: ImagesTopic
 
     ThumbnailsBucket:
       Type: AWS::S3::Bucket
@@ -417,12 +427,14 @@ resources:
       Type: AWS::KMS::Alias
       Properties:
         AliasName: alias/auth0Key-${self:provider.stage}
-        TargetKeyId: !Ref KMSKey
+        TargetKeyId: 
+          Ref: KMSKey
 
     Auth0Secret:
       Type: AWS::SecretsManager::Secret
       Properties:
         Name: ${self:provider.environment.AUTH_0_SECRET_ID}
         Description: Auth0 secret
-        KmsKeyId: !Ref KMSKey
+        KmsKeyId: 
+          Ref: KMSKey
 

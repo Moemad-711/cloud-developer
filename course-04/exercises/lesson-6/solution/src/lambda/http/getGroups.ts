@@ -6,9 +6,13 @@ import * as awsServerlessExpress from 'aws-serverless-express'
 
 const app = express()
 
+
+
 app.get('/groups', async (_req, res) => {
   const groups = await getAllGroups()
 
+  res.header("Access-Control-Allow-Origin" , "*"); 
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization");
   res.json({
     items: groups
   })
