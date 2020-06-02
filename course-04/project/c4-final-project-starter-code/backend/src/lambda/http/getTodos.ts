@@ -22,6 +22,7 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
     ExpressionAttributeValues: {
       ':userId': userId
     },
+    ProjectionExpression: 'todoId, createdAt, name, dueDate, done, attachmentUrl',
     ScanIndexForward: false
   }).promise()
 
