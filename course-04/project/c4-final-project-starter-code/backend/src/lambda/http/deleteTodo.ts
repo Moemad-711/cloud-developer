@@ -21,14 +21,14 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
 
   await docClient.delete({
     TableName: TODOTable,
+    Key:{
+      userId: userId,
+      todoId: todoId
+    },
     ConditionExpression:'userId = :userId AND todoId = :todoId',
     ExpressionAttributeValues:{
       ':userId': userId,
       ':todoId': todoId
-    }, 
-    Key:{
-      userId: userId,
-      todoId: todoId
     }
   })
 
@@ -38,9 +38,6 @@ export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEven
     headers: {
       'Access-Control-Allow-Origin': '*'
     },
-    body: JSON.stringify({
-      message: 'Item Deleted'
-      
-    })
+    body: ''
   }
 }
