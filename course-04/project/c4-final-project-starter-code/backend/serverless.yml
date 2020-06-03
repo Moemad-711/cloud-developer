@@ -29,13 +29,14 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs12.X
+  runtime: nodejs12.x
   
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'us-east-2'}
 
   environment:
     TODO_TABLE: TODO-${self:provider.stage}
+    INDEX_NAME: createdAtIndex
     ATTACH_S3_BUCKET: serverless-udagram-attach-m711-${self:provider.stage}
     SIGNED_URL_EXPIRATION: 300
     AUTH_0_SECRET_ID: Auth0Secret-${self:provider.stage}
@@ -167,6 +168,7 @@ functions:
           method: post
           authorizer: Auth
           path: todos/{todoId}/attachment
+          cors: true
     iamRoleStatements:
       - Effect: Allow
         Action: 
@@ -209,6 +211,7 @@ resources:
             KeyType: RANGE
         BillingMode: PAY_PER_REQUEST
         TableName: ${self:provider.environment.TODO_TABLE}
+        
 
     RequestBodyValidator:
       Type: AWS::ApiGateway::RequestValidator
@@ -248,7 +251,9 @@ resources:
             - Sid: PublicReadForGetBucketObjects
               Effect: Allow
               Principal: '*'
-              Action: 's3:GetObject'
+              Action: 
+                - s3:GetObject
+                - s3:PutObject
               Resource: 'arn:aws:s3:::${self:provider.environment.ATTACH_S3_BUCKET}/*'
         Bucket: 
           Ref: AttachmentsBucket
