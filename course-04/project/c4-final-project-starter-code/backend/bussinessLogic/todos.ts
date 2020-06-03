@@ -29,10 +29,19 @@ export async function createTodoItem(jwtToken, newTodo: CreateTodoRequest) : Pro
         attachmentUrl: `https://${bucketName}.s3.amazonaws.com/${todoId}`
       }
     
-    todoAccess.createTodoItem(newItem)
+    await todoAccess.createTodoItem(newItem)
     logger.info('user ${userId} created todo eith ID ${todoId}', newItem)
 
     return newItem as TodoItem
+}
+
+export async function getTodoItem(jwtToken, todoId) : Promise<Boolean>{
+    const userId = parseUserId(jwtToken)
+    
+    const result = await todoAccess.getTodoItem(userId, todoId)
+    logger.info('get todo items for user ${userId}')
+
+    return result 
 }
 
 export async function getTodoItems(jwtToken) : Promise<TodoItem[]>{

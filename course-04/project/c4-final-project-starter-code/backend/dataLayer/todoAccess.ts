@@ -26,12 +26,27 @@ export class TodoAccess {
         return result.Items as TodoItem[];
     } 
 
+    async getTodoItem(userId, todoId): Promise<Boolean>{
+        const result = await this.docClient.get({
+            TableName: this.TODOTable,
+            Key: {
+                userId,
+                todoId
+            }
+          }).promise()
+        
+        if(result){
+            return true
+        }
+        else {
+            return false
+        }
+    }
     async createTodoItem(newTodoItem){
         await this.docClient.put({
             TableName: this.TODOTable,
             Item: newTodoItem
         }).promise()
-
     }
 
     async updateTodoItem(userId, todoId, updatedTodo: UpdateTodoRequest) {
