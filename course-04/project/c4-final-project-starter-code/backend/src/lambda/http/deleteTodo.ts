@@ -1,18 +1,18 @@
 import 'source-map-support/register'
-import * as AWS from 'aws-sdk'
-import * as AWSXRay from 'aws-xray-sdk'
+//import * as AWS from 'aws-sdk'
+//import * as AWSXRay from 'aws-xray-sdk'
 
 import { APIGatewayProxyEvent, APIGatewayProxyResult, APIGatewayProxyHandler } from 'aws-lambda'
-import { parseUserId } from '../../auth/utils'
-import { createLogger } from '../../utils/logger'
+//import { parseUserId } from '../../auth/utils'
+//import { createLogger } from '../../utils/logger'
 import { deleteTodoItem } from '../../../bussinessLogic/todos'
 
-const XAWS = AWSXRay.captureAWS(AWS)
+//const XAWS = AWSXRay.captureAWS(AWS)
 
-const docClient = new  XAWS.DynamoDB.DocumentClient()
-const TODOTable = process.env.TODO_TABLE
+//const docClient = new  XAWS.DynamoDB.DocumentClient()
+//const TODOTable = process.env.TODO_TABLE
 
-const logger = createLogger('todoLogger')
+//const logger = createLogger('todoLogger')
 
 
 export const handler: APIGatewayProxyHandler = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
