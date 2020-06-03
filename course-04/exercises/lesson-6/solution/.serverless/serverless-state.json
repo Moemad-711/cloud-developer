@@ -368,7 +368,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591066241214-2020-06-02T02:50:41.214Z/RS256Auth.zip"
+                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591144803470-2020-06-03T00:40:03.470Z/RS256Auth.zip"
               },
               "FunctionName": "serverless-udagram-m711-app-dev-RS256Auth",
               "Handler": "src/lambda/auth/rs256Auth0Authorizer.handler",
@@ -419,7 +419,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591066241214-2020-06-02T02:50:41.214Z/Auth.zip"
+                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591144803470-2020-06-03T00:40:03.470Z/Auth.zip"
               },
               "FunctionName": "serverless-udagram-m711-app-dev-Auth",
               "Handler": "src/lambda/auth/auth0Authorizer.handler",
@@ -470,7 +470,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591066241214-2020-06-02T02:50:41.214Z/GetGroups.zip"
+                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591144803470-2020-06-03T00:40:03.470Z/GetGroups.zip"
               },
               "FunctionName": "serverless-udagram-m711-app-dev-GetGroups",
               "Handler": "src/lambda/http/getGroups.handler",
@@ -521,7 +521,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591066241214-2020-06-02T02:50:41.214Z/CreateGroup.zip"
+                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591144803470-2020-06-03T00:40:03.470Z/CreateGroup.zip"
               },
               "FunctionName": "serverless-udagram-m711-app-dev-CreateGroup",
               "Handler": "src/lambda/http/createGroup.handler",
@@ -572,7 +572,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591066241214-2020-06-02T02:50:41.214Z/GetImages.zip"
+                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591144803470-2020-06-03T00:40:03.470Z/GetImages.zip"
               },
               "FunctionName": "serverless-udagram-m711-app-dev-GetImages",
               "Handler": "src/lambda/http/getImages.handler",
@@ -624,7 +624,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591066241214-2020-06-02T02:50:41.214Z/CreateImage.zip"
+                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591144803470-2020-06-03T00:40:03.470Z/CreateImage.zip"
               },
               "FunctionName": "serverless-udagram-m711-app-dev-CreateImage",
               "Handler": "src/lambda/http/createImage.handler",
@@ -675,7 +675,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591066241214-2020-06-02T02:50:41.214Z/SendUploadNotifications.zip"
+                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591144803470-2020-06-03T00:40:03.470Z/SendUploadNotifications.zip"
               },
               "FunctionName": "serverless-udagram-m711-app-dev-SendUploadNotifications",
               "Handler": "src/lambda/s3/sendNotifications.handler",
@@ -730,7 +730,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591066241214-2020-06-02T02:50:41.214Z/ResizeImage.zip"
+                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591144803470-2020-06-03T00:40:03.470Z/ResizeImage.zip"
               },
               "FunctionName": "serverless-udagram-m711-app-dev-ResizeImage",
               "Handler": "src/lambda/s3/resizeImage.handler",
@@ -781,7 +781,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591066241214-2020-06-02T02:50:41.214Z/ConnectHandler.zip"
+                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591144803470-2020-06-03T00:40:03.470Z/ConnectHandler.zip"
               },
               "FunctionName": "serverless-udagram-m711-app-dev-ConnectHandler",
               "Handler": "src/lambda/websocket/connect.handler",
@@ -832,7 +832,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591066241214-2020-06-02T02:50:41.214Z/DisconnectHandler.zip"
+                "S3Key": "serverless/serverless-udagram-m711-app/dev/1591144803470-2020-06-03T00:40:03.470Z/DisconnectHandler.zip"
               },
               "FunctionName": "serverless-udagram-m711-app-dev-DisconnectHandler",
               "Handler": "src/lambda/websocket/disconnect.handler",
@@ -1240,7 +1240,7 @@
               "Type": "TOKEN"
             }
           },
-          "ApiGatewayDeployment1591066080178": {
+          "ApiGatewayDeployment1591144655038": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -3075,7 +3075,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/serverless-udagram-m711-app/dev/1591066241214-2020-06-02T02:50:41.214Z",
+    "artifactDirectoryName": "serverless/serverless-udagram-m711-app/dev/1591144803470-2020-06-03T00:40:03.470Z",
     "artifact": ""
   }
 }
